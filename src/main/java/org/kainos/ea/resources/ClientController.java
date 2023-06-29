@@ -1,3 +1,5 @@
+package org.kainos.ea.resources;
+
 import org.kainos.ea.api.ClientService;
 import org.kainos.ea.client.FailedToGetClientsException;
 

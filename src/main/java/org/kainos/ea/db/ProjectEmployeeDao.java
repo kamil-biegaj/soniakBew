@@ -9,10 +9,10 @@ import java.util.List;
 
 public class ProjectEmployeeDao {
 
-    private dataBaseConnector dataBaseConnector = new dataBaseConnector();
+    private DatabaseConnector databaseConnector = new DatabaseConnector();
 
     public List<ProjectEmployee> getAllProjectEmployees() throws SQLException {
-        Connection c = dataBaseConnector.getConnection();
+        Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery("SELECT projectEmployeeId, projectID, employeeId, onProject " +
                 "FROM Project_Employee;");
