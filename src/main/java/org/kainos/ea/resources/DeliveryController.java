@@ -19,7 +19,7 @@ public class DeliveryController {
     @GET
     @Path("/delivery")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getOrders()
+    public Response getDelivery()
     {
         try {
             return Response.ok(delservice.getAllDelivery()).build();
@@ -31,7 +31,7 @@ public class DeliveryController {
     @GET
     @Path("/delivery/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getOrderById(@PathParam("id") int id)
+    public Response getdeliveryById(@PathParam("id") int id)
     {
         try {
             try {
@@ -45,9 +45,9 @@ public class DeliveryController {
         }
     }
     @POST
-    @Path("/orders")
+    @Path("/delivery")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createOrder(DeliveryRequest del)
+    public Response createDelivery(DeliveryRequest del)
     {
         try {
             return Response.status(Response.Status.CREATED).entity(delservice.createDelivery(del)).build();
@@ -65,7 +65,7 @@ public class DeliveryController {
     @PUT
     @Path("/delivery/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateOrder(@PathParam("id") int id, DeliveryRequest delRequest)
+    public Response updateDelivery(@PathParam("id") int id, DeliveryRequest delRequest)
     {
         try {
             delservice.updateDelivery(id,delRequest);
@@ -85,7 +85,7 @@ public class DeliveryController {
     @DELETE
     @Path("/delivery/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteOrder(@PathParam("id") int id)
+    public Response deleteDelivery(@PathParam("id") int id)
     {
         try {
             delservice.deleteDelivery(id);
