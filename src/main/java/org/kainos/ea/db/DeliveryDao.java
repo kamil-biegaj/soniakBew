@@ -54,7 +54,7 @@ public class DeliveryDao {
     }
     public int createDelivery(DeliveryRequest sales) throws SQLException{
         Connection c = databaseConnector.getConnection();
-        String insertStatement = "INSERT INTO DeliveryEmployee (Name,Salary, BankNo, NIN) VALUES (?,?,?)";
+        String insertStatement = "INSERT INTO DeliveryEmployee (name,salary, bankNumber, nationalInsuranceNum) VALUES (?,?,?)";
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
         st.setString(1, sales.getName());
         st.setFloat(2,sales.getSalary());
@@ -72,7 +72,7 @@ public class DeliveryDao {
     }
     public void updateDelivery(int id, DeliveryRequest sales)   throws SQLException {
         Connection c = DatabaseConnector.getConnection();
-        String updateStatement = "UPDATE DeliveryEmployee SET Name = ?, Salary = ?, BankNo = ? NIN = ? Where deliveryEmployeeId = ?";
+        String updateStatement = "UPDATE DeliveryEmployee SET name = ?, salary = ?, bankNumber = ? nationalInsuranceNum = ? Where deliveryEmployeeId = ?";
         PreparedStatement st = c.prepareStatement(updateStatement);
         st.setString(1, sales.getName());
         st.setFloat(2,sales.getSalary());

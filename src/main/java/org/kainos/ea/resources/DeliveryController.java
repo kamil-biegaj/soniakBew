@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-@Api("Engineering Academy Dropwizard Order API")
+@Api("Engineering Academy Dropwizard Delivery API")
 @Path("/api")
 public class DeliveryController {
     private DeliveryService delservice = new DeliveryService();
