@@ -5,6 +5,10 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import org.kainos.ea.resources.ClientController;
+import org.kainos.ea.resources.DeliveryController;
+import org.kainos.ea.resources.ProjectEmployeeController;
+import org.kainos.ea.resources.SalaryController;
 
 public class trueApplication extends Application<trueConfiguration> {
 
@@ -30,7 +34,10 @@ public class trueApplication extends Application<trueConfiguration> {
     @Override
     public void run(final trueConfiguration configuration,
                     final Environment environment) {
-        // TODO: implement application
+        environment.jersey().register(new DeliveryController());
+        environment.jersey().register(new SalaryController());
+        environment.jersey().register(new ClientController());
+        environment.jersey().register(new ProjectEmployeeController());
     }
 
 }
