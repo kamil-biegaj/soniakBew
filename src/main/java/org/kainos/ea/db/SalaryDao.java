@@ -73,12 +73,11 @@ public class SalaryDao {
     }
     public void updateSales(int id, SalaryRequest sales)   throws SQLException {
         Connection c = DatabaseConnector.getConnection();
-        String updateStatement = "UPDATE SalesEmployee SET name = ?, salary = ?, bankNumber = ? nationalInsuranceNum = ? commissionRate = ? Where salesEmployeeId = ?";
+        String updateStatement = "UPDATE SalesEmployee SET name = ?, salary = ?, bankNumber = ?  commissionRate = ? Where salesEmployeeId = ?";
         PreparedStatement st = c.prepareStatement(updateStatement);
         st.setString(1, sales.getName());
         st.setFloat(2,sales.getSalary());
         st.setString(3,sales.getBankNum());
-        st.setString(4, sales.getNin());
         st.setFloat(5, sales.getComRate());
         st.setInt(6, id);
 
