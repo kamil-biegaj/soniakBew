@@ -1,2 +1,5 @@
-package org.kainos.ea.api;public class ProjectService {
+package org.kainos.ea.api;
+
+public class ProjectService {
+
 }
