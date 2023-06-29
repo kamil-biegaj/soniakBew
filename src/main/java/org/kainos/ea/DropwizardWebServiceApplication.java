@@ -10,10 +10,10 @@ import org.kainos.ea.resources.DeliveryController;
 import org.kainos.ea.resources.ProjectEmployeeController;
 import org.kainos.ea.resources.SalaryController;
 
-public class trueApplication extends Application<trueConfiguration> {
+public class DropwizardWebServiceApplication extends Application<DropwizardWebServiceConfiguration> {
 
     public static void main(final String[] args) throws Exception {
-        new trueApplication().run(args);
+        new DropwizardWebServiceApplication().run(args);
     }
 
     @Override
@@ -22,17 +22,17 @@ public class trueApplication extends Application<trueConfiguration> {
     }
 
     @Override
-    public void initialize(final Bootstrap<trueConfiguration> bootstrap) {
-        bootstrap.addBundle(new SwaggerBundle<trueConfiguration>(){
+    public void initialize(final Bootstrap<DropwizardWebServiceConfiguration> bootstrap) {
+        bootstrap.addBundle(new SwaggerBundle<DropwizardWebServiceConfiguration>(){
             @Override
-            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(trueConfiguration configuration){
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(DropwizardWebServiceConfiguration configuration){
                 return configuration.getSwagger();
             }
         });
     }
 
     @Override
-    public void run(final trueConfiguration configuration,
+    public void run(final DropwizardWebServiceConfiguration configuration,
                     final Environment environment) {
         environment.jersey().register(new DeliveryController());
         environment.jersey().register(new SalaryController());
