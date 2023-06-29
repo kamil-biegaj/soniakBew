@@ -1,6 +1,6 @@
 package org.kainos.ea.db;
 
-import org.kainos.ea.cli.Client;
+
 import org.kainos.ea.cli.ClientList;
 
 import java.sql.Connection;
@@ -17,14 +17,14 @@ public class ClientDao {
 
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery(dfvsdfv);
+        ResultSet rs = st.executeQuery("SELECT * FROM Clients");
 
         List<ClientList> clientList = new ArrayList<>();
 
         while (rs.next()) {
-            ClientList client = new ClientList(
+            ClientList client = new ClientList (
                     rs.getString("Name"),
-                    rs.getString("Employee Name")
+                    rs.getString("Employee Name"),
                     rs.getString("Project Name")
             );
             clientList.add(client);

@@ -6,6 +6,9 @@ public class ClientList {
     private  String salesEmployeeName;
     private String projectName;
 
+    public ClientList(String name, String employeeName, String projectName) {
+    }
+
 
     //getters and setters
     public String getClientName() {
