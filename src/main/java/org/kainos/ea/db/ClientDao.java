@@ -13,11 +13,11 @@ import java.util.List;
 public class ClientDao {
 
     public List<ClientList> getClientsList() throws SQLException {
-        Connection c = dataBaseConnector.getConnection();
+        Connection c = DatabaseConnector.getConnection();
 
-        Statement st = c.createstatement();
+        Statement st = c.createStatement();
 
-        ResultSet rs = st.excuteQuery(sdfkeabrf);
+        ResultSet rs = st.executeQuery(dfvsdfv);
 
         List<ClientList> clientList = new ArrayList<>();
 
