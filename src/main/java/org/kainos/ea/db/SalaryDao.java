@@ -84,7 +84,7 @@ public class SalaryDao {
 
         st.executeUpdate();
     }
-    public  void DeleteOrder(int id) throws SQLException
+    public  void DeleteSales(int id) throws SQLException
     {
         Connection c = DatabaseConnector.getConnection();
         String deleteStatement = "DELETE FROM SalesEmployee Where SalesEmployeeId = ?";
