@@ -17,14 +17,17 @@ public class ClientDao {
 
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT * FROM Clients");
+        ResultSet rs = st.executeQuery("SELECT Client.name as `Client Name`, SalesEmployee.name as `Sales Employee Name`, Project.name as `Project name`\n" +
+                "From Client\n" +
+                "JOIN Project USING (clientId)\n" +
+                "JOIN SalesEmployee USING (salesEmployeeID);");
 
         List<ClientList> clientList = new ArrayList<>();
 
         while (rs.next()) {
             ClientList client = new ClientList (
-                    rs.getString("Name"),
-                    rs.getString("Employee Name"),
+                    rs.getString("Client Name"),
+                    rs.getString("Sales Employee Name"),
                     rs.getString("Project Name")
             );
             clientList.add(client);
