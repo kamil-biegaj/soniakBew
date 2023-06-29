@@ -13,16 +13,16 @@ public class SalaryDao {
     public List<SalaryEmployee> getAllSalesEmp() throws SQLException {
         try (Connection c = databaseConnector.getConnection()) {
             Statement st = c.createStatement();
-            ResultSet rs = st.executeQuery("SELECT SalesEmployeeId,name,salary, bankNumber, nationalInsuranceNum, commissionRate FROM SalaryEmployee;");
+            ResultSet rs = st.executeQuery("SELECT salesEmployeeid,name,salary, bankNumber, nationalInsuranceNum, commissionRate FROM SalaryEmployee;");
             List<SalaryEmployee> salList = new ArrayList<>();
             while (rs.next()) {
                 SalaryEmployee sal = new SalaryEmployee(
-                        rs.getInt("SalesEmpId"),
-                        rs.getString("Name"),
-                        rs.getFloat("Salary"),
-                        rs.getString("BanNo"),
-                        rs.getString("NIN"),
-                        rs.getFloat("comRate"));
+                        rs.getInt("salesEmployeeid"),
+                        rs.getString("name"),
+                        rs.getFloat("salary"),
+                        rs.getString("bankNumber"),
+                        rs.getString("nationalInsuranceNum"),
+                        rs.getFloat("commissionRate"));
 
                 salList.add(sal);
             }
@@ -38,15 +38,15 @@ public class SalaryDao {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT name,salary, bankNumber, nationalInsuranceNum, comRate FROM SalesEmp where SalesEmpId = " + id);
+        ResultSet rs = st.executeQuery("SELECT name,salary, bankNumber, nationalInsuranceNum, commissionRate FROM SalesEmployee where salesEmployeeid = " + id);
         while (rs.next()) {
             return new SalaryEmployee(
-                    rs.getInt("SalesEmployeeId"),
-                    rs.getString("Name"),
-                    rs.getFloat("Salary"),
+                    rs.getInt("salesEmployeeId"),
+                    rs.getString("name"),
+                    rs.getFloat("salary"),
                     rs.getString("bankNumber"),
-                    rs.getString("NIN"),
-                    rs.getFloat("comRate"));
+                    rs.getString("nationalInsuranceNum"),
+                    rs.getFloat("commisionRate"));
 
 
         }

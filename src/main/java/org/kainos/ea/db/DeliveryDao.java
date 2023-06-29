@@ -15,15 +15,15 @@ public class DeliveryDao {
     public List<DeliveryEmployee> getAllDeliveryEmp() throws SQLException {
         try (Connection c = databaseConnector.getConnection()) {
             Statement st = c.createStatement();
-            ResultSet rs = st.executeQuery("SELECT DeliveryEmpId,Name,Salary, BankNo, NIN, comRate FROM SalaryEmployee;");
+            ResultSet rs = st.executeQuery("SELECT DeliveryEmployeeId,name,salary, bankNumber, nationalInsuranceNum FROM DeliveryEmployee;");
             List<DeliveryEmployee> delList = new ArrayList<>();
             while (rs.next()) {
                 DeliveryEmployee del = new DeliveryEmployee(
-                        rs.getInt("SalesEmpId"),
-                        rs.getString("Name"),
-                        rs.getFloat("Salary"),
-                        rs.getString("BanNo"),
-                        rs.getString("NIN"));
+                        rs.getInt("deliveryEmployeeid"),
+                        rs.getString("name"),
+                        rs.getFloat("salary"),
+                        rs.getString("bankNumber"),
+                        rs.getString("nationalInsuranceNum"));
 
                 delList.add(del);
             }
@@ -39,14 +39,14 @@ public class DeliveryDao {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT Name,Salary, BankNo, NIN,  FROM DeliveryEmployee where DeliveryEmpId = " + id);
+        ResultSet rs = st.executeQuery("SELECT name,salary, bankNumber, nationalInsuranceNum,  FROM DeliveryEmployee where deliveryEmployeeid = " + id);
         while (rs.next()) {
             return new DeliveryEmployee(
-                    rs.getInt("deliveryEmpId"),
-                    rs.getString("Name"),
-                    rs.getFloat("Salary"),
-                    rs.getString("bankNo"),
-                    rs.getString("NIN"));
+                    rs.getInt("deliveryEmployeeid"),
+                    rs.getString("name"),
+                    rs.getFloat("salary"),
+                    rs.getString("bankNumber"),
+                    rs.getString("nationalInsuranceNum"));
 
 
         }
