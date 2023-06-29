@@ -17,10 +17,7 @@ public class ClientDao {
 
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT Client.name as `Client Name`, SalesEmployee.name as `Sales Employee Name`, Project.name as `Project name`\n" +
-                "From Client\n" +
-                "JOIN Project USING (clientId)\n" +
-                "JOIN SalesEmployee USING (salesEmployeeID);");
+        ResultSet rs = st.executeQuery("SELECT Client.name as `Client Name`, SalesEmployee.name as `Sales Employee Name`, Project.name as `Project name` From Client JOIN Project USING (clientId) JOIN SalesEmployee USING (salesEmployeeID);");
 
         List<ClientList> clientList = new ArrayList<>();
 

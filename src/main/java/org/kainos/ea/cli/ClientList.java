@@ -3,12 +3,11 @@ package org.kainos.ea.cli;
 public class ClientList {
 
     private String clientName;
-    private  String salesEmployeeName;
+    private String salesEmployeeName;
     private String projectName;
 
     public ClientList(String name, String employeeName, String projectName) {
     }
-
 
     //getters and setters
     public String getClientName() {
