@@ -3,6 +3,8 @@ package org.kainos.ea;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 
 public class trueApplication extends Application<trueConfiguration> {
 
@@ -17,7 +19,12 @@ public class trueApplication extends Application<trueConfiguration> {
 
     @Override
     public void initialize(final Bootstrap<trueConfiguration> bootstrap) {
-        // TODO: application initialization
+        bootstrap.addBundle(new SwaggerBundle<trueConfiguration>(){
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(trueConfiguration configuration){
+                return configuration.getSwagger();
+            }
+        });
     }
 
     @Override
