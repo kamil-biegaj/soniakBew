@@ -11,7 +11,7 @@ public class ClientService {
 
     private ClientDao clientDao = new ClientDao();
 
-    public List<ClientList> getClientList() = throws FailedToGetClientsException {
+    public List<ClientList> getClientList()git add  throws FailedToGetClientsException {
         try {
             List<ClientList> clientList = clientDao.getClientsList();
 
