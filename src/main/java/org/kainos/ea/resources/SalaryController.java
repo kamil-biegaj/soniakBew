@@ -1,5 +1,6 @@
 package org.kainos.ea.resources;
 
+import io.swagger.annotations.Api;
 import org.kainos.ea.api.DeliveryService;
 import org.kainos.ea.api.SalaryService;
 import org.kainos.ea.cli.DeliveryRequest;
@@ -11,10 +12,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
+@Api("Engineering Academy Dropwizard Sales API")
+@Path("/api")
 public class SalaryController {
     private SalaryService salservice = new SalaryService();
     @GET
-    @Path("/salary")
+    @Path("/sales")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOrders()
     {
@@ -26,7 +29,7 @@ public class SalaryController {
         }
     }
     @GET
-    @Path("/salary/{id}")
+    @Path("/sales/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOrderById(@PathParam("id") int id)
     {
@@ -42,7 +45,7 @@ public class SalaryController {
         }
     }
     @POST
-    @Path("/salary")
+    @Path("/sales")
     @Produces(MediaType.APPLICATION_JSON)
     public Response createOrder(SalaryRequest del)
     {
@@ -60,7 +63,7 @@ public class SalaryController {
     }
 
     @PUT
-    @Path("/salary/{id}")
+    @Path("/sales/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateOrder(@PathParam("id") int id, SalaryRequest delRequest)
     {
@@ -81,7 +84,7 @@ public class SalaryController {
 
 
     @DELETE
-    @Path("/salary/{id}")
+    @Path("/sales/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteSales(@PathParam("id") int id)
     {
