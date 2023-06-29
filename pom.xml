@@ -45,6 +45,8 @@
                 <exclusion>
                     <groupId>javax.validation</groupId>
                     <artifactId>validation-api</artifactId>
+                    <groupId>javax.activation</groupId>
+                    <artifactId>activation-api</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
