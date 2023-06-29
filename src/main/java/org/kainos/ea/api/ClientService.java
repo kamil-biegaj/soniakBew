@@ -19,7 +19,7 @@ public class ClientService {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
 
-            throw new FailedToGetClientsException;
+            throw new FailedToGetClientsException();
         }
     }
 
