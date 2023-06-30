@@ -1,10 +1,9 @@
 package org.kainos.ea.core;
 
-import org.kainos.ea.cli.DeliveryRequest;
-import org.kainos.ea.cli.SalaryRequest;
+import org.kainos.ea.cli.SalesEmployeeRequest;
 
-public class SalesValidator {
-    public  String isValidSales(SalaryRequest del) {
+public class SalesEmployeeValidator {
+    public  String isValidSales(SalesEmployeeRequest del) {
         if (del.getName().length() > 50) {
             return "Name greater than 50 characters";
         }

@@ -1,15 +1,13 @@
 package org.kainos.ea.db;
 
 import org.kainos.ea.cli.DeliveryEmployee;
-import org.kainos.ea.cli.DeliveryRequest;
-import org.kainos.ea.cli.SalaryEmployee;
-import org.kainos.ea.cli.SalaryRequest;
+import org.kainos.ea.cli.DeliveryEmployeeRequest;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeliveryDao {
+public class DeliveryEmployeeDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
 
     public List<DeliveryEmployee> getAllDeliveryEmp() throws SQLException {
@@ -35,13 +33,13 @@ public class DeliveryDao {
         }
     }
 
-    public DeliveryRequest getDeliveryById(int id) throws SQLException {
+    public DeliveryEmployeeRequest getDeliveryById(int id) throws SQLException {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 
         ResultSet rs = st.executeQuery("SELECT name, salary, bankNumber, nationalInsuranceNum FROM DeliveryEmployee where deliveryEmployeeId = " + id);
         while (rs.next()) {
-            return new DeliveryRequest(
+            return new DeliveryEmployeeRequest(
                     rs.getString("name"),
                     rs.getFloat("salary"),
                     rs.getString("bankNumber"),
@@ -51,7 +49,7 @@ public class DeliveryDao {
         }
         return null;
     }
-    public int createDelivery(DeliveryRequest delivery) throws SQLException{
+    public int createDelivery(DeliveryEmployeeRequest delivery) throws SQLException{
         Connection c = databaseConnector.getConnection();
         String insertStatement = "INSERT INTO DeliveryEmployee (name, salary, bankNumber, nationalInsuranceNum) VALUES (?,?,?,?)";
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
@@ -69,7 +67,7 @@ public class DeliveryDao {
         }
         return  -1;
     }
-    public void updateDelivery(int id, DeliveryRequest delivery) throws SQLException {
+    public void updateDelivery(int id, DeliveryEmployeeRequest delivery) throws SQLException {
         Connection c = databaseConnector.getConnection();
         String updateStatement = "UPDATE DeliveryEmployee SET name = ?, salary = ?, bankNumber = ?, nationalInsuranceNum = ? WHERE deliveryEmployeeId = ?";
         PreparedStatement st = c.prepareStatement(updateStatement);

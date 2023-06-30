@@ -1,6 +1,6 @@
 package org.kainos.ea.cli;
 
-public class SalaryEmployee extends Employee{
+public class SalesEmployee extends Employee{
     private  float comRate;
 
     public float getComRate() {
@@ -11,7 +11,7 @@ public class SalaryEmployee extends Employee{
         this.comRate = comRate;
     }
 
-    public SalaryEmployee(int employeeId, String name, double salary, String bankNum, String nin, float comRate) {
+    public SalesEmployee(int employeeId, String name, double salary, String bankNum, String nin, float comRate) {
         super(employeeId, name, salary, bankNum, nin);
         setComRate(comRate);
     }
