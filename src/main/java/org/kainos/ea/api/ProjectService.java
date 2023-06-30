@@ -1,5 +1,13 @@
 package org.kainos.ea.api;
 
+import org.kainos.ea.cli.Project;
+import org.kainos.ea.db.ProjectDao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class ProjectService {
   private ProjectDao projectDao = new ProjectDao();
 
