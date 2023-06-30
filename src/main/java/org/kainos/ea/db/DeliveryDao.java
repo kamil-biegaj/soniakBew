@@ -19,7 +19,7 @@ public class DeliveryDao {
             List<DeliveryEmployee> delList = new ArrayList<>();
             while (rs.next()) {
                 DeliveryEmployee del = new DeliveryEmployee(
-                        rs.getInt("deliveryEmployeeid"),
+                        rs.getInt("deliveryEmployeeId"),
                         rs.getString("name"),
                         rs.getFloat("salary"),
                         rs.getString("bankNumber"),
@@ -35,14 +35,13 @@ public class DeliveryDao {
         }
     }
 
-    public DeliveryEmployee getDeliveryById(int id) throws SQLException {
+    public DeliveryRequest getDeliveryById(int id) throws SQLException {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT name,salary, bankNumber, nationalInsuranceNum,  FROM DeliveryEmployee where deliveryEmployeeid = " + id);
+        ResultSet rs = st.executeQuery("SELECT name, salary, bankNumber, nationalInsuranceNum FROM DeliveryEmployee where deliveryEmployeeId = " + id);
         while (rs.next()) {
-            return new DeliveryEmployee(
-                    rs.getInt("deliveryEmployeeid"),
+            return new DeliveryRequest(
                     rs.getString("name"),
                     rs.getFloat("salary"),
                     rs.getString("bankNumber"),
@@ -52,14 +51,14 @@ public class DeliveryDao {
         }
         return null;
     }
-    public int createDelivery(DeliveryRequest sales) throws SQLException{
+    public int createDelivery(DeliveryRequest delivery) throws SQLException{
         Connection c = databaseConnector.getConnection();
-        String insertStatement = "INSERT INTO DeliveryEmployee (name,salary, bankNumber, nationalInsuranceNum) VALUES (?,?,?)";
+        String insertStatement = "INSERT INTO DeliveryEmployee (name, salary, bankNumber, nationalInsuranceNum) VALUES (?,?,?,?)";
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
-        st.setString(1, sales.getName());
-        st.setFloat(2,sales.getSalary());
-        st.setString(3,sales.getBankNum());
-        st.setString(4, sales.getNin());
+        st.setString(1, delivery.getName());
+        st.setFloat(2,delivery.getSalary());
+        st.setString(3,delivery.getBankNum());
+        st.setString(4, delivery.getNin());
         st.executeUpdate();
 
 
@@ -70,21 +69,21 @@ public class DeliveryDao {
         }
         return  -1;
     }
-    public void updateDelivery(int id, DeliveryRequest sales)   throws SQLException {
-        Connection c = DatabaseConnector.getConnection();
-        String updateStatement = "UPDATE DeliveryEmployee SET name = ?, salary = ?, bankNumber = ? nationalInsuranceNum = ? Where deliveryEmployeeId = ?";
+    public void updateDelivery(int id, DeliveryRequest delivery) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+        String updateStatement = "UPDATE DeliveryEmployee SET name = ?, salary = ?, bankNumber = ?, nationalInsuranceNum = ? WHERE deliveryEmployeeId = ?";
         PreparedStatement st = c.prepareStatement(updateStatement);
-        st.setString(1, sales.getName());
-        st.setFloat(2,sales.getSalary());
-        st.setString(3,sales.getBankNum());
-        st.setString(4, sales.getNin());
+        st.setString(1, delivery.getName());
+        st.setFloat(2, delivery.getSalary());
+        st.setString(3, delivery.getBankNum());
+        st.setString(4, delivery.getNin());
         st.setInt(5, id);
 
         st.executeUpdate();
     }
-    public  void DeleteDelivery(int id) throws SQLException
+    public void deleteDelivery(int id) throws SQLException
     {
-        Connection c = DatabaseConnector.getConnection();
+        Connection c = databaseConnector.getConnection();
         String deleteStatement = "DELETE FROM DeliveryEmployee Where DeliveryEmployeeId = ?";
         PreparedStatement st = c.prepareStatement(deleteStatement);
         st.setInt(1,id);

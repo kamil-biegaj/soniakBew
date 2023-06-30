@@ -1,6 +1,3 @@
-package org.kainos.ea.db;public class DatabaseConnector {
-}
-
 package org.kainos.ea.db;
 
 import java.io.FileInputStream;

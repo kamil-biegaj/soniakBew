@@ -26,9 +26,9 @@ public class DeliveryService {
 
     }
 
-    public DeliveryEmployee getDeliveryById(int id) throws FailedToGetDeliverysException, DeliveryDoesNotExistException {
+    public DeliveryRequest getDeliveryById(int id) throws FailedToGetDeliverysException, DeliveryDoesNotExistException {
         try {
-            DeliveryEmployee del = delDao.getDeliveryById(id);
+            DeliveryRequest del = delDao.getDeliveryById(id);
             if (del == null) {
                 throw new DeliveryDoesNotExistException();
 
@@ -40,9 +40,9 @@ public class DeliveryService {
         }
     }
 
-    public int createDelivery(DeliveryRequest del) throws FailedToCreateDeliveryException, InvalidDeliveryException {
+    public int createDelivery(DeliveryRequest delivery) throws FailedToCreateDeliveryException, InvalidDeliveryException {
         try {
-            int id = delDao.createDelivery(del);
+            int id = delDao.createDelivery(delivery);
             if (id == 1) {
                 throw new FailedToCreateDeliveryException();
 
@@ -54,17 +54,21 @@ public class DeliveryService {
         }
     }
 
-    public void updateDelivery(int id, DeliveryRequest orderRequest) throws InvalidDeliveryException, DeliveryDoesNotExistException, SQLException, FailedToUpdateDeliveryException {
+    public void updateDelivery(int id, DeliveryRequest delivery) throws InvalidDeliveryException, DeliveryDoesNotExistException, SQLException, FailedToUpdateDeliveryException {
         try {
-            String validation = delValidator.isValidDelivery(orderRequest);
-            if (validation != null) {
-                DeliveryEmployee delToUp = delDao.getDeliveryById(id);
-                if (delToUp == null) {
-                    throw new DeliveryDoesNotExistException();
-                }
-                delDao.updateDelivery(id, orderRequest);
+            String validation = delValidator.isValidDelivery(delivery);
 
+            if (validation != null) {
+                throw new InvalidDeliveryException(validation);
             }
+
+            DeliveryRequest deliveryToUpdate = delDao.getDeliveryById(id);
+
+            if (deliveryToUpdate == null) {
+                throw new DeliveryDoesNotExistException();
+            }
+
+            delDao.updateDelivery(id, delivery);
 
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -75,11 +79,12 @@ public class DeliveryService {
     {
         try
         {
-            DeliveryEmployee DeliveryToDelete = delDao.getDeliveryById(id);
+            DeliveryRequest DeliveryToDelete = delDao.getDeliveryById(id);
             if(DeliveryToDelete == null)
             {
                 throw new DeliveryDoesNotExistException();
             }
+            delDao.deleteDelivery(id);
         } catch (SQLException e) {
             System.err.println(e.getMessage());
             throw new FailedToDeleteDeliveryException();
