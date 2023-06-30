@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectDao{
-    public List<Project> getProjectsList() throws SQLException {
+    public List<Project> getAllProjects() throws SQLException {
         Connection c = DatabaseConnector.getConnection();
 
         Statement st = c.createStatement();
@@ -22,10 +22,10 @@ public class ProjectDao{
 
         while (rs.next()) {
             Project client = new Project (
-                    rs.getInt("Project"),
-                    rs.getString("Name"),
-                    rs.getBoolean("Status"),
-                    rs.getInt("Client")
+                    rs.getInt("projectId"),
+                    rs.getString("name"),
+                    rs.getBoolean("status"),
+                    rs.getInt("clientId")
 
             );
             projectList.add(client);

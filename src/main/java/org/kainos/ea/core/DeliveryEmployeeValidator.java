@@ -1,9 +1,9 @@
 package org.kainos.ea.core;
 
-import org.kainos.ea.cli.DeliveryRequest;
+import org.kainos.ea.cli.DeliveryEmployeeRequest;
 
-public class DeliveryValidator {
-    public  String isValidDelivery(DeliveryRequest del)
+public class DeliveryEmployeeValidator {
+    public  String isValidDelivery(DeliveryEmployeeRequest del)
     {
         if(del.getName().length() > 50)
         {

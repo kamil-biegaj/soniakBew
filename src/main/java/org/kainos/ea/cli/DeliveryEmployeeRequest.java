@@ -2,7 +2,7 @@ package org.kainos.ea.cli;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class DeliveryRequest {
+public class DeliveryEmployeeRequest {
     private String name;
     private float salary;
     private  String bankNum;
@@ -42,10 +42,10 @@ public class DeliveryRequest {
     }
 
 
-    public DeliveryRequest(@JsonProperty("name") String name,
-                           @JsonProperty("salary")  float salary,
-                           @JsonProperty("bankNum")  String bankNum,
-                           @JsonProperty("nationalInsuranceNumber")  String nin) {
+    public DeliveryEmployeeRequest(@JsonProperty("name") String name,
+                                   @JsonProperty("salary")  float salary,
+                                   @JsonProperty("bankNum")  String bankNum,
+                                   @JsonProperty("nationalInsuranceNumber")  String nin) {
         setName(name);
         setSalary(salary);
         setBankNum(bankNum);

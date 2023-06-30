@@ -1,24 +1,20 @@
 package org.kainos.ea.api;
 
-import org.kainos.ea.cli.DeliveryEmployee;
-import org.kainos.ea.cli.DeliveryRequest;
-import org.kainos.ea.cli.SalaryEmployee;
-import org.kainos.ea.cli.SalaryRequest;
+import org.kainos.ea.cli.SalesEmployee;
+import org.kainos.ea.cli.SalesEmployeeRequest;
 import org.kainos.ea.client.*;
-import org.kainos.ea.core.DeliveryValidator;
-import org.kainos.ea.core.SalesValidator;
-import org.kainos.ea.db.DeliveryDao;
-import org.kainos.ea.db.SalaryDao;
+import org.kainos.ea.core.SalesEmployeeValidator;
+import org.kainos.ea.db.SalesEmployeeDao;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class SalaryService {
-    private SalaryDao delDao = new SalaryDao();
-    private SalesValidator delValidator = new SalesValidator();
+public class SalesEmployeeService {
+    private SalesEmployeeDao delDao = new SalesEmployeeDao();
+    private SalesEmployeeValidator delValidator = new SalesEmployeeValidator();
 
-    public List<SalaryEmployee> getAllSales() throws FailedToGetDeliverysException {
-        List<SalaryEmployee> delList = null;
+    public List<SalesEmployee> getAllSales() throws FailedToGetDeliverysException {
+        List<SalesEmployee> delList = null;
         try {
             delList = delDao.getAllSalesEmp();
             return delList;
@@ -29,9 +25,9 @@ public class SalaryService {
 
     }
 
-    public SalaryEmployee getsalesById(int id) throws FailedToGetDeliverysException, DeliveryDoesNotExistException {
+    public SalesEmployeeRequest getsalesById(int id) throws FailedToGetDeliverysException, DeliveryDoesNotExistException {
         try {
-            SalaryEmployee del = delDao.getSalesById(id);
+            SalesEmployeeRequest del = delDao.getSalesById(id);
             if (del == null) {
                 throw new DeliveryDoesNotExistException();
 
@@ -43,7 +39,7 @@ public class SalaryService {
         }
     }
 
-    public int createSales(SalaryRequest del) throws FailedToCreateSalesException, InvalidSalesException {
+    public int createSales(SalesEmployeeRequest del) throws FailedToCreateSalesException, InvalidSalesException {
         try {
             int id = delDao.createSales(del);
             if (id == 1) {
@@ -57,11 +53,11 @@ public class SalaryService {
         }
     }
 
-    public void updateSales(int id, SalaryRequest orderRequest) throws InvalidSalesException, SalesDoesNotExistException, SQLException, FailedToUpdateSalesException {
+    public void updateSales(int id, SalesEmployeeRequest orderRequest) throws InvalidSalesException, SalesDoesNotExistException, SQLException, FailedToUpdateSalesException {
         try {
             String validation = delValidator.isValidSales(orderRequest);
             if (validation != null) {
-                SalaryEmployee delToUp = delDao.getSalesById(id);
+                SalesEmployeeRequest delToUp = delDao.getSalesById(id);
                 if (delToUp == null) {
                     throw new SalesDoesNotExistException();
                 }
@@ -78,7 +74,7 @@ public class SalaryService {
     {
         try
         {
-            SalaryEmployee DeliveryToDelete = delDao.getSalesById(id);
+            SalesEmployeeRequest DeliveryToDelete = delDao.getSalesById(id);
             if(DeliveryToDelete == null)
             {
                 throw new SalesDoesNotExistException();

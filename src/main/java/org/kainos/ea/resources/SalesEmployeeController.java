@@ -1,41 +1,39 @@
 package org.kainos.ea.resources;
 
 import io.swagger.annotations.Api;
-import org.kainos.ea.api.DeliveryService;
-import org.kainos.ea.cli.DeliveryRequest;
+import org.kainos.ea.api.SalesEmployeeService;
+import org.kainos.ea.cli.SalesEmployeeRequest;
 import org.kainos.ea.client.*;
-import org.kainos.ea.db.DatabaseConnector;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-@Api("Engineering Academy Dropwizard Delivery API")
+import java.sql.SQLException;
+
+@Api("Engineering Academy Dropwizard SalesEmployee API")
 @Path("/api")
-public class DeliveryController {
-    private DeliveryService delservice = new DeliveryService();
+public class SalesEmployeeController {
+    private SalesEmployeeService salservice = new SalesEmployeeService();
     @GET
-    @Path("/delivery")
+    @Path("/sales")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDelivery()
+    public Response getOrders()
     {
         try {
-            return Response.ok(delservice.getAllDelivery()).build();
+            return Response.ok(salservice.getAllSales()).build();
         } catch (FailedToGetDeliverysException e) {
             System.err.println(e.getMessage());
             return Response.serverError().build();
         }
     }
     @GET
-    @Path("/delivery/{id}")
+    @Path("/sales/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getdeliveryById(@PathParam("id") int id)
+    public Response getOrderById(@PathParam("id") int id)
     {
         try {
             try {
-                return Response.ok(delservice.getDeliveryById(id)).build();
+                return Response.ok(salservice.getsalesById(id)).build();
             } catch (DeliveryDoesNotExistException e) {
                 throw new RuntimeException(e);
             }
@@ -45,55 +43,56 @@ public class DeliveryController {
         }
     }
     @POST
-    @Path("/delivery")
+    @Path("/sales")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createDelivery(DeliveryRequest del)
+    public Response createOrder(SalesEmployeeRequest del)
     {
         try {
-            return Response.status(Response.Status.CREATED).entity(delservice.createDelivery(del)).build();
+            return Response.status(Response.Status.CREATED).entity(salservice.createSales(del)).build();
         }
-        catch (FailedToCreateDeliveryException e) {
+        catch (FailedToCreateSalesException e) {
 
             System.err.println(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).build();
-        } catch (InvalidDeliveryException e) {
-            System.err.println(e.getMessage());
+        }
+         catch (InvalidSalesException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
 
     @PUT
-    @Path("/delivery/{id}")
+    @Path("/sales/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateDelivery(@PathParam("id") int id, DeliveryRequest delRequest)
+    public Response updateOrder(@PathParam("id") int id, SalesEmployeeRequest delRequest)
     {
         try {
-            delservice.updateDelivery(id,delRequest);
+            salservice.updateSales(id,delRequest);
             return  Response.status(Response.Status.ACCEPTED).build();
         }
-        catch (DeliveryDoesNotExistException | InvalidDeliveryException e) {
+        catch (SalesDoesNotExistException | InvalidSalesException e) {
             System.err.println(e.getMessage());
             return  Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        } catch (FailedToUpdateDeliveryException e) {
+        } catch (FailedToUpdateSalesException e) {
             System.err.println(e.getMessage());
             return  Response.serverError().build();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        }
 
-    }
+
     @DELETE
-    @Path("/delivery/{id}")
+    @Path("/sales/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteDelivery(@PathParam("id") int id)
+    public Response deleteSales(@PathParam("id") int id)
     {
         try {
-            delservice.deleteDelivery(id);
+            salservice.deleteSales(id);
             return Response.ok().build();
-        } catch (DeliveryDoesNotExistException e) {
+        } catch (SalesDoesNotExistException e) {
             System.err.println(e.getMessage());
             return  Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        } catch (FailedToDeleteDeliveryException e) {
+        } catch (FailedToDeleteSalesException e) {
             throw new RuntimeException(e);
         }
     }

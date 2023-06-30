@@ -1,18 +1,18 @@
 package org.kainos.ea.api;
 
 import org.kainos.ea.cli.DeliveryEmployee;
-import org.kainos.ea.cli.DeliveryRequest;
+import org.kainos.ea.cli.DeliveryEmployeeRequest;
 import org.kainos.ea.client.*;
-import org.kainos.ea.core.DeliveryValidator;
-import org.kainos.ea.db.DeliveryDao;
+import org.kainos.ea.core.DeliveryEmployeeValidator;
+import org.kainos.ea.db.DeliveryEmployeeDao;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class DeliveryService {
 
-    private DeliveryDao delDao = new DeliveryDao();
-    private DeliveryValidator delValidator = new DeliveryValidator();
+    private DeliveryEmployeeDao delDao = new DeliveryEmployeeDao();
+    private DeliveryEmployeeValidator delValidator = new DeliveryEmployeeValidator();
 
     public List<DeliveryEmployee> getAllDelivery() throws FailedToGetDeliverysException {
         List<DeliveryEmployee> delList = null;
@@ -26,9 +26,9 @@ public class DeliveryService {
 
     }
 
-    public DeliveryRequest getDeliveryById(int id) throws FailedToGetDeliverysException, DeliveryDoesNotExistException {
+    public DeliveryEmployeeRequest getDeliveryById(int id) throws FailedToGetDeliverysException, DeliveryDoesNotExistException {
         try {
-            DeliveryRequest del = delDao.getDeliveryById(id);
+            DeliveryEmployeeRequest del = delDao.getDeliveryById(id);
             if (del == null) {
                 throw new DeliveryDoesNotExistException();
 
@@ -40,7 +40,7 @@ public class DeliveryService {
         }
     }
 
-    public int createDelivery(DeliveryRequest delivery) throws FailedToCreateDeliveryException, InvalidDeliveryException {
+    public int createDelivery(DeliveryEmployeeRequest delivery) throws FailedToCreateDeliveryException, InvalidDeliveryException {
         try {
             int id = delDao.createDelivery(delivery);
             if (id == 1) {
@@ -54,7 +54,7 @@ public class DeliveryService {
         }
     }
 
-    public void updateDelivery(int id, DeliveryRequest delivery) throws InvalidDeliveryException, DeliveryDoesNotExistException, SQLException, FailedToUpdateDeliveryException {
+    public void updateDelivery(int id, DeliveryEmployeeRequest delivery) throws InvalidDeliveryException, DeliveryDoesNotExistException, SQLException, FailedToUpdateDeliveryException {
         try {
             String validation = delValidator.isValidDelivery(delivery);
 
@@ -62,7 +62,7 @@ public class DeliveryService {
                 throw new InvalidDeliveryException(validation);
             }
 
-            DeliveryRequest deliveryToUpdate = delDao.getDeliveryById(id);
+            DeliveryEmployeeRequest deliveryToUpdate = delDao.getDeliveryById(id);
 
             if (deliveryToUpdate == null) {
                 throw new DeliveryDoesNotExistException();
@@ -79,7 +79,7 @@ public class DeliveryService {
     {
         try
         {
-            DeliveryRequest DeliveryToDelete = delDao.getDeliveryById(id);
+            DeliveryEmployeeRequest DeliveryToDelete = delDao.getDeliveryById(id);
             if(DeliveryToDelete == null)
             {
                 throw new DeliveryDoesNotExistException();
