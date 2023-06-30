@@ -1,7 +1,7 @@
 package org.kainos.ea.cli;
 
 
-public  class Employee   {
+public abstract class Employee   {
     private int employeeId;
     private String name;
     private double salary;

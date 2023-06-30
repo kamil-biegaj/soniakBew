@@ -42,7 +42,10 @@ public class DeliveryRequest {
     }
 
 
-    public DeliveryRequest(@JsonProperty("clientId") String name, @JsonProperty("Salary")  float salary, @JsonProperty("BankNum")  String bankNum, @JsonProperty("NIN")  String nin) {
+    public DeliveryRequest(@JsonProperty("name") String name,
+                           @JsonProperty("salary")  float salary,
+                           @JsonProperty("bankNum")  String bankNum,
+                           @JsonProperty("nationalInsuranceNumber")  String nin) {
         setName(name);
         setSalary(salary);
         setBankNum(bankNum);
